@@ -1,0 +1,8 @@
+source 'https://rubygems.org'
+group :development do
+  gem 'rspec'
+end
+
+gem 'pry'
+gem 'httparty'
+gem 'dotenv'
