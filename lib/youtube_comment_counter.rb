@@ -1,4 +1,5 @@
-require 'httparty'
+require 'json'
+require 'typhoeus'
 require 'dotenv'
 Dotenv.load
 
@@ -36,7 +37,7 @@ module YouTubeCommentCounter
     end
 
     def page(query)
-      HTTParty.get("https://www.googleapis.com/youtube/v3/commentThreads", {query: query})
+      JSON.parse(Typhoeus::Request.new("https://www.googleapis.com/youtube/v3/commentThreads", {params: query}).run.body)
     end
   end
 end

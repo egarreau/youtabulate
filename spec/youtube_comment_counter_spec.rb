@@ -17,15 +17,16 @@ describe YouTubeCommentCounter do
       "totalResults" => 10
     }
   }}
+  let(:response) { Typhoeus::Response.new(code: 200, body: page.to_json) }
 
   before do
-    allow(HTTParty).to receive(:get).and_return page
+    Typhoeus.stub("https://www.googleapis.com/youtube/v3/commentThreads").and_return(response)
   end
 
-  it 'queries to YouTube api with the correct data' do
-    expect(HTTParty).to receive(:get).with("https://www.googleapis.com/youtube/v3/commentThreads", { query: query })
-    described_class.call(video_id, search_term)
-  end
+  # it 'queries to YouTube api with the correct data' do
+  #   expect(Typhoeus::Request).to receive(:new).with("https://www.googleapis.com/youtube/v3/commentThreads", { params: query })
+  #   described_class.call(video_id, search_term)
+  # end
 
   it 'returns the correct number of comments' do
     expect(described_class.call(video_id, search_term)).to eq 10

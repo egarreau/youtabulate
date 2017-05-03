@@ -4,5 +4,5 @@ group :development do
 end
 
 gem 'pry'
-gem 'httparty'
+gem 'typhoeus'
 gem 'dotenv'
