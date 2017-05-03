@@ -31,7 +31,7 @@ module YouTubeCommentCounter
       {
         part: 'snippet,replies',
         key: ENV['YOUTUBE_API_KEY'],
-        maxResults: 100,
+        maxResults: 100, #This is the max number of comment threads YouTube allows you to pull at one time. If a video has more than that, they will be split into multiple pages.
       }.merge(options)
     end
 
