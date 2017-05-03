@@ -18,18 +18,16 @@ describe YouTubeCommentCounter do
     }
   }}
 
-  subject { described_class.new(video_id, search_term) }
-
   before do
     allow(HTTParty).to receive(:get).and_return page
   end
 
   it 'queries to YouTube api with the correct data' do
     expect(HTTParty).to receive(:get).with("https://www.googleapis.com/youtube/v3/commentThreads", { query: query })
-    subject.count
+    described_class.call(video_id, search_term)
   end
 
   it 'returns the correct number of comments' do
-    expect(subject.count).to eq 10
+    expect(described_class.call(video_id, search_term)).to eq 10
   end
 end
